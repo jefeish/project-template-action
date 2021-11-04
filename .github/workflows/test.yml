@@ -2,12 +2,15 @@ name: Test
 
 on:
   pull_request:
-    types: [opened]
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+<<<<<<< HEAD
       - run: npm install @octokit/action
+=======
+			- run: npm install @octokit/action
+>>>>>>> f6d62c5 (init)
       - uses: ./
