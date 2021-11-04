@@ -1,0 +1,5 @@
+name: "Project Template Action"
+description: "GitHub action to create Project Boards from template Yaml files"
+runs:
+  using: node14
+  main: index.js
