@@ -32,7 +32,7 @@ jobs:
 
 ## Issue *Trigger-Command*
 
-to trigger an automated project board setup based on templates. Place a `/slash` command in an Issue comment or body. 
+to trigger an automated project board setup based on templates, place a `/slash` command in an Issue comment or body. 
 
 ### Sample
 
