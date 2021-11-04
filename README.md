@@ -44,7 +44,7 @@ to trigger an automated project board setup based on templates, place a `/slash`
 
 ## Project Template Sample
 
-Location: `.github/PROJECT_TEMPLATE/`
+Location: `.github/PROJECT_TEMPLATE/prj-template-a.yml`
 
 ```Yaml
 ---
