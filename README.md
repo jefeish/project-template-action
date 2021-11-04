@@ -4,6 +4,14 @@ GitHub action to create Project Boards from template Yaml files.
 
 This **Action** creates a **Project Board with pre-polulated Issues**, based on **Issue-Templates**.
 
+---
+
+## Overview 
+
+![overview](docs/images/pb-action.png)
+
+---
+
 ## Action Workflow Example
 
 Location: `.github/workflows/action.yml`
