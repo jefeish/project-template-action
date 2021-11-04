@@ -1,5 +1,3 @@
-
-
 async function run() {
     const { Octokit } = require("@octokit/action");
     const octokit = new Octokit();
