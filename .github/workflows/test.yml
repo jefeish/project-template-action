@@ -9,6 +9,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: npm install @octokit/action
-			env:
-        GITHUB_TOKEN: ${{ secrets.SECRET_PAT }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.SECRET_PAT }}
       - uses: ./
