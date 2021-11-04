@@ -1,0 +1,27 @@
+{
+  "name": "project-template-action",
+  "version": "1.0.0",
+  "description": "GitHub action to create Project Boards from template Yaml files",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jefeish/project-template-action.git"
+  },
+  "keywords": [
+    "GitHub",
+    "Action"
+  ],
+  "author": "jefeish",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jefeish/project-template-action/issues"
+  },
+  "homepage": "https://github.com/jefeish/project-template-action#readme",
+  "dependencies": {
+    "@octokit/action": "^3.18.0",
+    "octokit": "^1.7.0"
+  }
+}
