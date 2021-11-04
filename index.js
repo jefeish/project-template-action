@@ -7,7 +7,7 @@ async function run() {
     //     repo,
     //     title: "My test issue",
     // });
-    console.log("Issue created: %s", data);
+    console.log("Issue created");
 }
 
 run();
