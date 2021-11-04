@@ -18,10 +18,10 @@ columns:
   - name: Done
     manage: none
 Issues:
-    - name: Issue_1
-      template: bug
-    - name: Issue_2
-      template: task
-    - name: Issue_3
-      template: rfc
+  - name: Issue_1
+    template: bug
+  - name: Issue_2
+    template: task
+  - name: Issue_3
+    template: rfc
 ```
