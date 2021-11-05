@@ -1,4 +1,30 @@
-async function run() {
+const fs = require('fs');
+
+async function exec() {
+    ret = fs.readdir(".", options, callback)
+    console.log(ret)
+}
+
+async function getProjectTemplate() {
+// Function to get current filenames
+// in directory
+    fs.readdir(__dirname, (err, files) => {
+    if (err)
+      console.log(err);
+    else {
+      console.log("\nCurrent directory filenames:");
+      files.forEach(file => {
+        console.log(file);
+      })
+    }
+  })
+}
+
+async function getProjectTemplate() {
+
+}
+
+async function createIssue() {
     const { Octokit } = require("@octokit/action");
     const octokit = new Octokit();
     const [owner, repo] = process.env.GITHUB_REPOSITORY.split("/");
@@ -12,4 +38,4 @@ async function run() {
     console.log("Issue created: %s", data);
 }
 
-run();
+exec();
