@@ -8,16 +8,20 @@ async function exec() {
 async function getProjectTemplate() {
 // Function to get current filenames
 // in directory
-    fs.readdir(__dirname, (err, files) => {
-    if (err)
-      console.log(err);
-    else {
-      console.log("\nCurrent directory filenames:");
-      files.forEach(file => {
-        console.log(file);
-      })
+    try {
+        fs.readdir(__dirname, (err, files) => {
+            if (err)
+                console.log(err);
+            else {
+                console.log("\nCurrent directory filenames:");
+                files.forEach(file => {
+                    console.log(file);
+                })
+            }
+        })
+    } catch (e) {
+        console.log(e)
     }
-  })
 }
 
 async function getProjectTemplate() {
