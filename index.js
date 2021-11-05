@@ -7,22 +7,23 @@ async function exec() {
 }
 
 async function getProjectTemplate() {
+    console.log('getProjectTemplate');
     // Function to get current filenames
     // in directory
-    try {
-        fs.readdir(__dirname, (err, files) => {
-            if (err)
-                console.log(err);
-            else {
-                console.log("\nCurrent directory filenames:");
-                files.forEach(file => {
-                    console.log(file);
-                })
-            }
-        })
-    } catch (e) {
-        throw new Error(e.toString());
-    }
+    // try {
+    //     fs.readdir(__dirname, (err, files) => {
+    //         if (err)
+    //             console.log(err);
+    //         else {
+    //             console.log("\nCurrent directory filenames:");
+    //             files.forEach(file => {
+    //                 console.log(file);
+    //             })
+    //         }
+    //     })
+    // } catch (e) {
+    //     throw new Error(e.toString());
+    // }
 }
 
 async function getProjectTemplate() {
