@@ -73,4 +73,3 @@ Issues:
   - name: Issue_3
     template: rfc
 ```
-
