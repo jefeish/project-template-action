@@ -1,4 +1,5 @@
 const fs = require('fs');
+const github = require('@actions/github')
 
 async function exec() {
     console.log('exec');
@@ -8,6 +9,8 @@ async function exec() {
 
 async function getProjectTemplate() {
     console.log('getProjectTemplate');
+    const repo = github.context.payload.repository.full_name
+    console.log(`full name: ${repo}!`)
     // Function to get current filenames
     // in directory
     try {
