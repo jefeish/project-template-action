@@ -2,13 +2,13 @@ const fs = require('fs');
 const github = require('@actions/github')
 
 async function exec() {
-    console.log('exec');
+    console.log('exec()');
     ret = await getProjectTemplate()
     console.log('ret: '+ret)
 }
 
 async function getProjectTemplate() {
-    console.log('getProjectTemplate');
+    console.log('getProjectTemplate()');
     const repo = github.context.payload.repository.full_name
     console.log(`full name: ${repo}!`)
     // Function to get current filenames
