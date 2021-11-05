@@ -2,8 +2,8 @@ const fs = require('fs');
 
 async function exec() {
     console.log('exec');
-    ret = getProjectTemplate()
-    console.log(ret)
+    ret = await getProjectTemplate()
+    console.log('ret: '+ret)
 }
 
 async function getProjectTemplate() {
