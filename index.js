@@ -1,13 +1,14 @@
 const fs = require('fs');
 
 async function exec() {
+    console.log('exec');
     ret = getProjectTemplate()
     console.log(ret)
 }
 
 async function getProjectTemplate() {
-// Function to get current filenames
-// in directory
+    // Function to get current filenames
+    // in directory
     try {
         fs.readdir(__dirname, (err, files) => {
             if (err)
@@ -20,12 +21,12 @@ async function getProjectTemplate() {
             }
         })
     } catch (e) {
-        console.log(e)
+        throw new Error(e.toString());
     }
 }
 
 async function getProjectTemplate() {
-
+    console.log('getProjectTemplate');
 }
 
 async function createIssue() {
