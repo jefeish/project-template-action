@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 async function exec() {
-    ret = fs.readdir(".", options, callback)
+    ret = getProjectTemplate()
     console.log(ret)
 }
 
