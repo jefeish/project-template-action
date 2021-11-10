@@ -40,7 +40,7 @@ jobs:
 
 ## Issue *Trigger-Command*
 
-to trigger an automated project board setup based on templates, place a `/slash` command in an Issue comment or body. 
+to trigger an automated project board setup based on templates, place a `/slash` command in an Issue comment or body.
 
 ### Sample
 
@@ -92,4 +92,17 @@ projects:
 
 ```
 
+## Concept Details
 
+### TL;DR
+
+#### The goal of this action is to **`build a project board`** and `Cards` from scratch, using a template Yaml file!
+
+This action strictly uses templates to create all of it's components. Project board `Issues` as well as `Cards`, must be based on a `.github/ISSUE_TEMPLATE`.
+
+ :thinking: Why? ...This ensures a standardized process that provides consitency and reusablilty.
+
+However, this approach requires that we have an `Issue Template` for every project card we create.
+To be precise, you cannot provide project card  content information in the project template Yaml file, only references to `Issue Templates`.
+
+> NOTE: Project Cards are created based on Issue Templates, the content only, not the Header information (assignees, label, etc.)

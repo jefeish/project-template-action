@@ -8,8 +8,8 @@ const { Octokit } = require("@octokit/rest");
 
 // ----------------------------------------------------------------------------
 
-const projectTemplatePath = '../.github/PROJECT_TEMPLATE'
-const issueTemplatePath = '../.github/ISSUE_TEMPLATE'
+const projectTemplatePath = './.github/PROJECT_TEMPLATE'
+const issueTemplatePath = './.github/ISSUE_TEMPLATE'
 const templateName = 'project-1'
 let owner = 'jefeish'
 let repo = 'migration'
@@ -30,10 +30,8 @@ function sleep(ms) {
  * @returns Project template content
  */
 async function getTemplate(templatePath, templateName, templateType) {
-    // console.log('TemplatePath: '+ templatePath + '/' + templateName)
     let fullTemplatePath = ''
     let template = ''
-    let templateTmp = ''
     let ext = ''
     
     switch (templateType) {
@@ -44,11 +42,6 @@ async function getTemplate(templatePath, templateName, templateType) {
             template = yaml.load(data);
             break;
         case 'Card':
-            // Use only the Issue template body for the Card
-            ext = '.md'
-            fullTemplatePath = templatePath + '/' + templateName + ext
-            template = fs.readFileSync(fullTemplatePath, 'utf8');
-            break;
         case 'Issue':
             ext = '.md'
             fullTemplatePath = templatePath + '/' + templateName + ext
