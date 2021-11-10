@@ -22,6 +22,9 @@
   "homepage": "https://github.com/jefeish/project-template-action#readme",
   "dependencies": {
     "@octokit/action": "^3.18.0",
-    "octokit": "^1.7.0"
+    "@octokit/rest": "^18.12.0",
+    "js-yaml": "^4.1.0",
+    "octokit": "^1.7.0",
+    "yaml": "^1.10.2"
   }
 }

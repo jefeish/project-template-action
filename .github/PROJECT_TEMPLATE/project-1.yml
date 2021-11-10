@@ -1,15 +1,33 @@
 ---
-name: Project_1
-description: Test Project
-columns:
-  - name: ToDo
-    manage: none
-  - name: InProgress
-    manage: none
-  - name: Done
-    manage: none
-Issues:
-  - name: Issue_1
-    template: bug
-  - name: Issue_2
-    template: task
+projects:
+  - name: Project_3
+    description: Test Project 1 
+    columns:
+
+      - name: ToDo
+        manage: none
+        cards:
+          - name: Issue_1
+            type: Issue
+            template: task
+            parameters:
+              TASK: BUG
+              TITLE: another one
+          - name: Issue_2
+            type: Issue
+            template: task
+            parameters:
+              TASK: RFC
+              TITLE: new request
+          - name: Issue_3
+            type: Card
+            template: task
+            parameters:
+              TASK: RFC
+              TITLE: new request
+
+      - name: InProgress
+        manage: none
+
+      - name: Done
+        manage: none
