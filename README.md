@@ -56,7 +56,7 @@ Location: `.github/PROJECT_TEMPLATE/prj-template-a.yml`
 
 ```Yaml
 ---
-Projects:
+projects:
   - name: Project_1
     description: Test Project 
     columns:
