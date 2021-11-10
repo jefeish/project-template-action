@@ -67,9 +67,15 @@ Projects:
           - name: Issue_1
             type: Issue
             template: bug
+            parameters:
+              TASK: BUG
+              TITLE: another one
           - name: Issue_2
             type: Issue
             template: task
+            parameters:
+              TASK: BUG
+              TITLE: another one
       # Project Board Column  
       - name: InProgress
         manage: none
