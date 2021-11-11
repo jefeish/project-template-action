@@ -2,8 +2,8 @@
 name: Task
 about: This template can be used to define delivery tasks
 title: '[TASK] {{TASK}}'
-label: Task
-assignees: octocat
+label: Task,Feature,Alarm
+assignees: jefeish
 ---
 
 ## Task Request

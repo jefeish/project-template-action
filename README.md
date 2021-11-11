@@ -23,7 +23,7 @@ on:
   issues:
     types: [opened, edited]
   issue_comment:
-    types: [created,edited]
+    types: [created, edited]
 
 jobs:
   test:

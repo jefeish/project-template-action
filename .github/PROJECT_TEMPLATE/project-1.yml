@@ -2,6 +2,8 @@
 projects:
   - name: Project_3
     description: Test Project 1 
+    # Milestone due date - example format '2022-11-10T00:00:00Z'
+    duedate: '2022-11-10T00:00:00Z'
     columns:
 
       - name: ToDo
@@ -27,6 +29,16 @@ projects:
               TITLE: new request
 
       - name: InProgress
+        manage: none
+        cards:
+          - name: Issue_4
+            type: Issue
+            template: bug
+            parameters:
+              TASK: BUG
+              TITLE: new bug
+
+      - name: Review
         manage: none
 
       - name: Done

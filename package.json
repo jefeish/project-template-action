@@ -23,8 +23,12 @@
   "dependencies": {
     "@octokit/action": "^3.18.0",
     "@octokit/rest": "^18.12.0",
+    "husky": "^7.0.4",
     "js-yaml": "^4.1.0",
     "octokit": "^1.7.0",
     "yaml": "^1.10.2"
+  },
+  "devDependencies": {
+    "documentjs": "^0.5.5"
   }
 }
