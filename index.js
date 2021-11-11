@@ -219,14 +219,15 @@ async function createProjectMilestone(milestoneName, description, dueDate) {
  * @param {*} column 
  * @returns 
  */
-async function createProjectColumn(projectId, column) {
+function createProjectColumn(projectId, column) {
     try {
-        return await octokit.rest.projects.createColumn({
+        return octokit.rest.projects.createColumn({
             project_id: projectId,
             name: column['name']
         })
     } catch (e) {
         console.log(e)
+        return 'error'
     }
 }
 
@@ -236,9 +237,9 @@ async function createProjectColumn(projectId, column) {
  * @param {*} body 
  * @returns 
  */
-async function createProject(name, body) {
+function createProject(name, body) {
     try {
-        return await octokit.rest.projects.createForRepo({
+        return octokit.rest.projects.createForRepo({
             owner: owner,
             repo: repo,
             name: name,
@@ -246,6 +247,7 @@ async function createProject(name, body) {
         });
     } catch (e) {
         console.log(e)
+        return 'error'
     }
 }
 
