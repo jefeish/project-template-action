@@ -233,8 +233,8 @@ function createProjectColumn(projectId, column) {
  * @param {*} body 
  * @returns 
  */
-async function createProject(name, body) {
-    const project = await octokit.rest.projects.createForRepo({
+function createProject(name, body) {
+    const project = octokit.rest.projects.createForRepo({
         owner: owner,
         repo: repo,
         name: name,
