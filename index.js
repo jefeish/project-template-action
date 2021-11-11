@@ -7,22 +7,22 @@
  * @author jefeish@github.com
  * @license MIT
  */
+
+const core = require('@actions/core');
+const github = require('@actions/github');
+
 const fs = require('fs');
 const yaml = require('js-yaml')
 const util = require('util')
-const { Octokit } = require("@octokit/rest");
 
 // ----------------------------------------------------------------------------
 
 const projectTemplatePath = './.github/PROJECT_TEMPLATE'
 const issueTemplatePath = './.github/ISSUE_TEMPLATE'
 const templateName = 'project-1'
-let owner = 'jefeish'
-let repo = 'migration'
-
-const octokit = new Octokit({
-    auth: process.env.PAT
-});
+let owner = ''
+let repo = ''
+let octokit
 
 /**
  * @description Retrieve templates for type of: 'projects', 'Issues' or 'Cards'
@@ -35,7 +35,7 @@ async function getTemplate(templatePath, templateName, templateType) {
     let fullTemplatePath = ''
     let template = ''
     let ext = ''
-    
+
     switch (templateType) {
         case 'project':
             ext = '.yml'
@@ -50,7 +50,7 @@ async function getTemplate(templatePath, templateName, templateType) {
             template = fs.readFileSync(fullTemplatePath, 'utf8');
             break;
         default:
-            throw new Error('No valid templateType was provided (' + templateType + ')')
+            throw new Error('No valid templateType was provided (' + templateType + ') - Valid types: [ project | Card | Issue ]')
     }
     return template
 }
@@ -74,14 +74,14 @@ async function createProjectCard(columnId, issueTemplate, type, parameters, mile
     const assigneesRegex = /assignees:.*/g
 
     if (type == 'Issue') {
-        
+
         // Substitute parameters
         if (parameters) {
             for (const [key, value] of Object.entries(parameters)) {
-                issueTemplate = String(issueTemplate).replaceAll("{{"+ key +"}}", value)
+                issueTemplate = String(issueTemplate).replaceAll("{{" + key + "}}", value)
             }
         }
-        
+
         // Extract template headers
         const name = (String(String(issueTemplate).match(nameRegex))).split(':')[1].trim()
         const about = (String(String(issueTemplate).match(aboutRegex))).split(':')[1].trim()
@@ -109,7 +109,7 @@ async function createProjectCard(columnId, issueTemplate, type, parameters, mile
         // Create the requested labels, ignore the error if they already exist
         labels.forEach(async function (label, index) {
             // pick a random color, otherwise we get grey
-            const colors = ['407294','8b66ff','a12b8d','09a752','a7a109','0fa709','a109a7','a7090f','09a7a1','ff00ff','ffff00','ff0000','0000ff','ff0080','ffff00','0001ff','00ff00','ff00ff','ff0080','00ff7f','7f00ff','80ff00','ff7f00','0080ff','00ff80','00ffff','ff000a','00fff5','ff008a','00ff75','000bff','7500ff','ff000b','8aff00','008aff','ff7500','2bffff','ff2b95','2bff2b','ff2b95','2bff2b','2b2bff']
+            const colors = ['407294', '8b66ff', 'a12b8d', '09a752', 'a7a109', '0fa709', 'a109a7', 'a7090f', '09a7a1', 'ff00ff', 'ffff00', 'ff0000', '0000ff', 'ff0080', 'ffff00', '0001ff', '00ff00', 'ff00ff', 'ff0080', '00ff7f', '7f00ff', '80ff00', 'ff7f00', '0080ff', '00ff80', '00ffff', 'ff000a', '00fff5', 'ff008a', '00ff75', '000bff', '7500ff', 'ff000b', '8aff00', '008aff', 'ff7500', '2bffff', 'ff2b95', '2bff2b', 'ff2b95', '2bff2b', '2b2bff']
             const i = Math.floor(Math.random() * colors.length)
             const color = colors[i]
             // remove the color we just picked, try to prevent same colors for different labels (works as long as we have, labels <= #colors)
@@ -119,18 +119,17 @@ async function createProjectCard(columnId, issueTemplate, type, parameters, mile
                 issue = await octokit.rest.issues.createLabel({
                     owner: owner,
                     repo: repo,
-                    description: 'auto-generated ['+ label +']',
+                    description: 'auto-generated [' + label + ']',
                     name: label,
                     color: color
                 })
             }
-            catch (e)
-            {
+            catch (e) {
                 // console.log(e)
-                console.log('WARN: Creating Label ('+ label +') failed, it probably already exists... continue!')
+                console.log('WARN: Creating Label (' + label + ') failed, it probably already exists... continue!')
             }
         })
-        
+
         try {
             issue = await octokit.rest.issues.create({
                 owner: owner,
@@ -142,8 +141,7 @@ async function createProjectCard(columnId, issueTemplate, type, parameters, mile
                 milestone: milestoneNumber
             });
         }
-        catch (e)
-        {
+        catch (e) {
             console.log(e)
         }
 
@@ -151,27 +149,27 @@ async function createProjectCard(columnId, issueTemplate, type, parameters, mile
             column_id: columnId,
             content_id: issue['data']['id'],
             content_type: type
-          });
+        });
     }
     else if (type == 'Card') {
         // Substitute parameters
         if (parameters) {
             for (const [key, value] of Object.entries(parameters)) {
-                issueTemplate = String(issueTemplate).replaceAll("{{"+ key +"}}", value)
+                issueTemplate = String(issueTemplate).replaceAll("{{" + key + "}}", value)
             }
         }
-        
+
         // Delete template headers
         const template1 = String(issueTemplate).replace(nameRegex, '')
-        const template2 = String(template1).replace(aboutRegex,'')
-        const template3 = String(template2).replace(titleRegex,'')
-        const template4 = String(template3).replace(labelRegex,'')
+        const template2 = String(template1).replace(aboutRegex, '')
+        const template3 = String(template2).replace(titleRegex, '')
+        const template4 = String(template3).replace(labelRegex, '')
         issueBody = String(template4).replace(assigneesRegex, '')
-        
+
         card = await octokit.rest.projects.createCard({
             column_id: columnId,
             note: issueBody
-          });
+        });
     }
     return card
 }
@@ -197,17 +195,16 @@ async function createProjectMilestone(milestoneName, description, dueDate) {
         });
         return milestone
     }
-    catch (e)
-    {
+    catch (e) {
         // console.log(e)
         console.log('WARN: Creating the Milestone ran into a problem, look up and return an existing Milestone')
         const milestoneList = await octokit.rest.issues.listMilestones({
             owner: owner,
             repo: repo
         })
-        
+
         milestoneList['data'].forEach(async function (mStone, index) {
-            
+
             if (mStone['title'] == title) {
                 milestone = mStone
             }
@@ -250,19 +247,31 @@ async function createProject(name, body) {
  * @description Entrypoint
  */
 async function exec() {
+    const token = core.getInput("github_token");
+    octokit = new github.getOctokit({
+        auth: token
+    });
+
+    owner = github.context.repo.owner
+    repo = github.context.repo.owner
+    
+    console.log(`{ 
+        owner: owner, 
+        repo: repo, 
+    }`)
+
     // Retrieve the project template
     const projectTemplate = await getTemplate(projectTemplatePath, templateName, 'project')
     const projects = projectTemplate['projects']
-    
+
     if (projects) {
         // Iterate over projects
         projects.forEach(async function (prj, index) {
             const project = await createProject(prj['name'], prj['description'])
             const projectId = project['data']['id']
-            let columns = prj['columns']
-            let cardIds = []
-            const milestone = await createProjectMilestone(prj['name'], prj['description'],  prj['duedate']) 
-            
+            const columns = prj['columns']
+            const milestone = await createProjectMilestone(prj['name'], prj['description'], prj['duedate'])
+
             if (columns) {
                 // Iterate over columns in project
                 for (let i = 0; i < columns.length; i++) {
@@ -276,8 +285,7 @@ async function exec() {
                             const cardTemplateName = card['template']
                             // Retrieve the local issue template
                             const issueTemplate = await getTemplate(issueTemplatePath, cardTemplateName, card['type'])
-                            const columnCard = await createProjectCard(columnId, issueTemplate, card['type'], card['parameters'], milestone['number'] )
-                            cardIds.push(columnCard['data']['id']);
+                            const columnCard = await createProjectCard(columnId, issueTemplate, card['type'], card['parameters'], milestone['number'])
                         })
                     }
                 }
