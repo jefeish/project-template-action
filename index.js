@@ -263,47 +263,47 @@ async function exec() {
         octokit = new github.getOctokit({
             auth: token
         });
-    } catch (e) {
-        console.log(e)
-    }
 
-    owner = github.context.repo.owner
-    repo = github.context.repo.repo
+        owner = github.context.repo.owner
+        repo = github.context.repo.repo
 
-    console.log(' owner: ' + owner + '\n repo: ' + repo)
-    console.log('process.env.GITHUB_TOKEN: ' + token)
+        console.log(' owner: ' + owner + '\n repo: ' + repo)
+        console.log('GITHUB_TOKEN: ' + token)
 
-    // Retrieve the project template
-    const projectTemplate = await getTemplate(projectTemplatePath, templateName, 'project')
-    const projects = projectTemplate['projects']
+        // Retrieve the project template
+        const projectTemplate = await getTemplate(projectTemplatePath, templateName, 'project')
+        const projects = projectTemplate['projects']
 
-    if (projects) {
-        // Iterate over projects
-        projects.forEach(async function (prj, index) {
-            const project = await createProject(prj['name'], prj['description'])
-            const projectId = project['data']['id']
-            const columns = prj['columns']
-            const milestone = await createProjectMilestone(prj['name'], prj['description'], prj['duedate'])
+        if (projects) {
+            // Iterate over projects
+            projects.forEach(async function (prj, index) {
+                const project = await createProject(prj['name'], prj['description'])
+                const projectId = project['data']['id']
+                const columns = prj['columns']
+                const milestone = await createProjectMilestone(prj['name'], prj['description'], prj['duedate'])
 
-            if (columns) {
-                // Iterate over columns in project
-                for (let i = 0; i < columns.length; i++) {
-                    const projectColumn = await createProjectColumn(projectId, columns[i])
-                    const columnId = projectColumn['data']['id']
-                    const cards = columns[i]['cards']
+                if (columns) {
+                    // Iterate over columns in project
+                    for (let i = 0; i < columns.length; i++) {
+                        const projectColumn = await createProjectColumn(projectId, columns[i])
+                        const columnId = projectColumn['data']['id']
+                        const cards = columns[i]['cards']
 
-                    if (cards) {
-                        // Iterate over cards in column
-                        cards.forEach(async function (card, index) {
-                            const cardTemplateName = card['template']
-                            // Retrieve the local issue template
-                            const issueTemplate = await getTemplate(issueTemplatePath, cardTemplateName, card['type'])
-                            const columnCard = await createProjectCard(columnId, issueTemplate, card['type'], card['parameters'], milestone['number'])
-                        })
+                        if (cards) {
+                            // Iterate over cards in column
+                            cards.forEach(async function (card, index) {
+                                const cardTemplateName = card['template']
+                                // Retrieve the local issue template
+                                const issueTemplate = await getTemplate(issueTemplatePath, cardTemplateName, card['type'])
+                                const columnCard = await createProjectCard(columnId, issueTemplate, card['type'], card['parameters'], milestone['number'])
+                            })
+                        }
                     }
                 }
-            }
-        })
+            })
+        }
+    } catch (e) {
+        console.log(e)
     }
 }
 
