@@ -247,7 +247,7 @@ async function createProject(name, body) {
  * @description Entrypoint
  */
 async function exec() {
-    const token
+    let token
 
     try {
         token = core.getInput("github_token");
