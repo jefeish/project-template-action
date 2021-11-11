@@ -256,7 +256,8 @@ async function exec() {
     repo = github.context.repo.repo
     
     console.log(' owner: '+ owner +'\n repo: '+ repo )
-
+    console.log('process.env.GITHUB_TOKEN: ' + process.env.GITHUB_TOKEN)
+    
     // Retrieve the project template
     const projectTemplate = await getTemplate(projectTemplatePath, templateName, 'project')
     const projects = projectTemplate['projects']
