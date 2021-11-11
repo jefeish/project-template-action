@@ -235,12 +235,16 @@ async function createProjectColumn(projectId, column) {
  */
 async function createProject(name, body) {
 
-    return await octokit.rest.projects.createForRepo({
-        owner: owner,
-        repo: repo,
-        name: name,
-        body: body
-    });
+    try {
+        return await octokit.rest.projects.createForRepo({
+            owner: owner,
+            repo: repo,
+            name: name,
+            body: body
+        });
+    } catch (e) {
+        console.log(e)
+    }
 }
 
 /**
@@ -255,17 +259,16 @@ async function exec() {
         octokit = new github.getOctokit({
             auth: token
         });
-    } catch (e)
-    {
+    } catch (e) {
         console.log(e)
     }
-    
+
     owner = github.context.repo.owner
     repo = github.context.repo.repo
-    
-    console.log(' owner: '+ owner +'\n repo: '+ repo )
+
+    console.log(' owner: ' + owner + '\n repo: ' + repo)
     console.log('process.env.GITHUB_TOKEN: ' + token)
-    
+
     // Retrieve the project template
     const projectTemplate = await getTemplate(projectTemplatePath, templateName, 'project')
     const projects = projectTemplate['projects']
