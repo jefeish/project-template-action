@@ -220,11 +220,11 @@ async function createProjectMilestone(milestoneName, description, dueDate) {
  * @returns 
  */
 function createProjectColumn(projectId, column) {
-const column =  octokit.rest.projects.createColumn({
-            project_id: projectId,
-            name: column['name']
-        })
-        return column
+    const col = octokit.rest.projects.createColumn({
+        project_id: projectId,
+        name: column['name']
+    })
+    return col
 }
 
 /**
