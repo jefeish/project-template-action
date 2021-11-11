@@ -106,3 +106,4 @@ However, this approach requires that we have an `Issue Template` for every proje
 To be precise, you cannot provide project card  content information in the project template Yaml file, only references to `Issue Templates`.
 
 > NOTE: Project Cards are created based on Issue Templates, the content only, not the Header information (assignees, label, etc.)
+
