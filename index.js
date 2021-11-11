@@ -253,7 +253,7 @@ async function exec() {
     });
 
     owner = github.context.repo.owner
-    repo = github.context.repo.owner
+    repo = github.context.repo.repo
     
     console.log(' owner: '+ owner +'\n repo: '+ repo )
 
