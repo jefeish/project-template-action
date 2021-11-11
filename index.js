@@ -248,15 +248,17 @@ async function createProject(name, body) {
  */
 async function exec() {
 
+    const token = core.getInput("github_token");
+
     octokit = new github.getOctokit({
-        auth: process.env.GITHUB_TOKEN
+        auth: token
     });
 
     owner = github.context.repo.owner
     repo = github.context.repo.repo
     
     console.log(' owner: '+ owner +'\n repo: '+ repo )
-    console.log('process.env.GITHUB_TOKEN: ' + process.env.GITHUB_TOKEN)
+    console.log('process.env.GITHUB_TOKEN: ' + token)
     
     // Retrieve the project template
     const projectTemplate = await getTemplate(projectTemplatePath, templateName, 'project')
