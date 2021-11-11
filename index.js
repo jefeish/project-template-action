@@ -255,10 +255,7 @@ async function exec() {
     owner = github.context.repo.owner
     repo = github.context.repo.owner
     
-    console.log(`{ 
-        owner: owner, 
-        repo: repo, 
-    }`)
+    console.log(' owner: '+ owner +'\n repo: '+ repo )
 
     // Retrieve the project template
     const projectTemplate = await getTemplate(projectTemplatePath, templateName, 'project')
