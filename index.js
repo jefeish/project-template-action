@@ -31,7 +31,7 @@ let octokit
  * @param {*} templateType 
  * @returns 
  */
-async function getTemplate(templatePath, templateName, templateType) {
+function getTemplate(templatePath, templateName, templateType) {
     let fullTemplatePath = ''
     let template = ''
     let ext = ''
@@ -268,16 +268,16 @@ async function exec() {
 
         if (projects) {
             // Iterate over projects
-            projects.forEach(async function (prj, index) {
-                const project = await createProject(prj['name'], prj['description'])
+            projects.forEach(function (prj, index) {
+                const project = createProject(prj['name'], prj['description'])
                 const projectId = project['data']['id']
                 const columns = prj['columns']
-                const milestone = await createProjectMilestone(prj['name'], prj['description'], prj['duedate'])
+                const milestone = createProjectMilestone(prj['name'], prj['description'], prj['duedate'])
 
                 if (columns) {
                     // Iterate over columns in project
                     for (let i = 0; i < columns.length; i++) {
-                        const projectColumn = await createProjectColumn(projectId, columns[i])
+                        const projectColumn = createProjectColumn(projectId, columns[i])
                         const columnId = projectColumn['data']['id']
                         const cards = columns[i]['cards']
 
@@ -286,8 +286,8 @@ async function exec() {
                             cards.forEach(async function (card, index) {
                                 const cardTemplateName = card['template']
                                 // Retrieve the local issue template
-                                const issueTemplate = await getTemplate(issueTemplatePath, cardTemplateName, card['type'])
-                                const columnCard = await createProjectCard(columnId, issueTemplate, card['type'], card['parameters'], milestone['number'])
+                                const issueTemplate = getTemplate(issueTemplatePath, cardTemplateName, card['type'])
+                                const columnCard = createProjectCard(columnId, issueTemplate, card['type'], card['parameters'], milestone['number'])
                             })
                         }
                     }
