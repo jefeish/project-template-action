@@ -247,9 +247,9 @@ async function createProject(name, body) {
  * @description Entrypoint
  */
 async function exec() {
-    const token = core.getInput("github_token");
+
     octokit = new github.getOctokit({
-        auth: token
+        auth: process.env.GITHUB_TOKEN
     });
 
     owner = github.context.repo.owner
