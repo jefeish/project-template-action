@@ -143,7 +143,6 @@ async function createProjectCard(columnId, issueTemplate, type, parameters, mile
                 milestone: milestoneNumber
             });
 
-
             card = await octokit.rest.projects.createCard({
                 column_id: columnId,
                 content_id: issue['data']['id'],
