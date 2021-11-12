@@ -19,7 +19,7 @@ const util = require('util')
 
 const projectTemplatePath = './.github/PROJECT_TEMPLATE'
 const issueTemplatePath = './.github/ISSUE_TEMPLATE'
-const templateName = 'project-1'
+let templateName = ''
 let owner = ''
 let repo = ''
 let octokit
