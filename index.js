@@ -66,6 +66,7 @@ function getTemplate(templatePath, templateName, templateType) {
  */
 async function createProjectCard(columnId, issueTemplate, type, parameters, milestoneNumber) {
     let issueBody = ''
+    let card
     const lineRegex = '/^-.-$/g'
     const nameRegex = /name:.*/g
     const aboutRegex = /about:.*/g
