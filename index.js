@@ -263,10 +263,10 @@ async function exec() {
 
     try {
         token = core.getInput("GITHUB_TOKEN");
-
-        octokit = new github.getOctokit({
-            auth: token
-        });
+        octokit = github.getOctokit(token)
+        // octokit = new github.getOctokit({
+        //     auth: token
+        // });
 
         owner = github.context.repo.owner
         repo = github.context.repo.repo
