@@ -307,6 +307,7 @@ async function exec() {
             issue_number: issueNumber,
         })
         templateName = issue['data']['body'].split(' ')[1].trim()
+        console.log(issue['data']['body'])
         // console.log(util.inspect(issue))
         console.log('templateName: >'+ templateName +'<')
 
