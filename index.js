@@ -306,6 +306,7 @@ async function exec() {
             repo: repo,
             issue_number: issueNumber,
         })
+        console.log(issue['data']['body'])
         templateName = issue['data']['body'].split(' ')[1].trim()
         console.log(issue['data']['body'])
         // console.log(util.inspect(issue))
