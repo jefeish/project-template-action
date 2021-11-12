@@ -250,7 +250,7 @@ async function exec() {
     let token
 
     try {
-        token = core.getInput("github_token");
+        token = core.getInput("GITHUB_TOKEN");
 
         octokit = new github.getOctokit({
             auth: token
