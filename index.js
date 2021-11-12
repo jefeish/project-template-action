@@ -154,7 +154,7 @@ async function createProjectCard(columnId, issueTemplate, type, parameters, mile
             // Substitute parameters
             if (parameters) {
                 for (const [key, value] of Object.entries(parameters)) {
-                    issueTemplate = String(issueTemplate).replaceAll("{{" + key + "}}", value)
+                    issueTemplate = String(issueTemplate).split("{{" + key + "}}").join(value)
                 }
             }
 
