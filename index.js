@@ -300,8 +300,14 @@ async function exec() {
         console.log('GITHUB_TOKEN: ' + token)
 
         // Get the name of the project template
-        console.log(util.inspect(github.context.issue.number))
-
+        const issueNumber = github.context.issue.number
+        const issue = await octokit.rest.issues.get({
+            owner: owner,
+            repo: repo,
+            issue_number: issueNumber,
+        })
+        console.log(util.inspect(issue))
+        
         // Retrieve the project template
         const projectTemplate = getTemplate(projectTemplatePath, templateName, 'project')
         const projects = projectTemplate['projects']
