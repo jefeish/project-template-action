@@ -1,9 +1,21 @@
 <mxfile host="65bd71144e">
     <diagram id="6o4tnCjdxANNbsr4hsJV" name="Page-1">
-        <mxGraphModel dx="198" dy="469" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+        <mxGraphModel dx="889" dy="469" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
+                <mxCell id="29" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+                    <mxGeometry x="382.75" y="186" width="115" height="115" as="geometry"/>
+                </mxCell>
+                <mxCell id="27" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+                    <mxGeometry x="132.5" y="195" width="100" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="28" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+                    <mxGeometry x="132.5" y="380" width="100" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="26" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+                    <mxGeometry x="132.5" y="30" width="100" height="100" as="geometry"/>
+                </mxCell>
                 <mxCell id="saldxAls0CMVUxLMnOsH-15" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontFamily=varela round;fontSize=18;verticalAlign=bottom;labelPosition=left;verticalLabelPosition=top;align=right;strokeColor=#666666;fontColor=#333333;" parent="1" vertex="1">
                     <mxGeometry x="577.5" y="110" width="520" height="280" as="geometry"/>
                 </mxCell>
@@ -105,7 +117,7 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="25" value="" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fontSize=24;fontColor=#FF0000;size=20;strokeColor=none;fillColor=#CCCCCC;" parent="1" vertex="1">
+                <mxCell id="25" value="" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fontSize=24;fontColor=#FF0000;size=20;fillColor=#CCCCCC;strokeColor=#E6E6E6;strokeWidth=2;" parent="1" vertex="1">
                     <mxGeometry x="500" y="215" width="77.5" height="60" as="geometry"/>
                 </mxCell>
             </root>
