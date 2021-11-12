@@ -300,8 +300,8 @@ async function exec() {
         console.log('GITHUB_TOKEN: ' + token)
 
         // Get the name of the project template
-        console.log(util.inspect(github.context.issue))
-        
+        console.log(util.inspect(github.context.issue.number))
+
         // Retrieve the project template
         const projectTemplate = getTemplate(projectTemplatePath, templateName, 'project')
         const projects = projectTemplate['projects']
