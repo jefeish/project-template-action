@@ -80,11 +80,11 @@ projects:
       - name: InProgress
         manage: none
         cards:
-          - name: Issue_1
+          - name: Card_1
             type: Card
             template: bug
-          - name: Issue_2
-            type: Card
+          - name: Issue_1
+            type: Issue
             template: task
       # Project Board Column  
       - name: Done
