@@ -73,64 +73,64 @@ async function createProjectCard(columnId, issueTemplate, type, parameters, mile
     const labelRegex = /label:.*/g
     const assigneesRegex = /assignees:.*/g
 
-    if (type == 'Issue') {
+    try {
+        if (type == 'Issue') {
 
-        // Substitute parameters
-        if (parameters) {
-            for (const [key, value] of Object.entries(parameters)) {
-                issueTemplate = String(issueTemplate).replaceAll("{{" + key + "}}", value)
+            // Substitute parameters
+            if (parameters) {
+                for (const [key, value] of Object.entries(parameters)) {
+                    issueTemplate = String(issueTemplate).replaceAll("{{" + key + "}}", value)
+                }
             }
-        }
 
-        // Extract template headers
-        const name = (String(String(issueTemplate).match(nameRegex))).split(':')[1].trim()
-        const about = (String(String(issueTemplate).match(aboutRegex))).split(':')[1].trim()
-        const title = (String(String(issueTemplate).match(titleRegex))).split(':')[1].trim()
-        const labels = (String(String(issueTemplate).match(labelRegex))).split(':')[1].trim().split(',')
-        const assignees = (String(String(issueTemplate).match(assigneesRegex))).split(':')[1].trim().split(',')
+            // Extract template headers
+            const name = (String(String(issueTemplate).match(nameRegex))).split(':')[1].trim()
+            const about = (String(String(issueTemplate).match(aboutRegex))).split(':')[1].trim()
+            const title = (String(String(issueTemplate).match(titleRegex))).split(':')[1].trim()
+            const labels = (String(String(issueTemplate).match(labelRegex))).split(':')[1].trim().split(',')
+            const assignees = (String(String(issueTemplate).match(assigneesRegex))).split(':')[1].trim().split(',')
 
-        // Delete template headers (poorman's version)
-        const template1 = String(issueTemplate).replace(lineRegex, '')
-        const template2 = String(template1).replace(nameRegex, '')
-        const template3 = String(template2).replace(nameRegex, '')
-        const template4 = String(template3).replace(aboutRegex, '')
-        const template5 = String(template4).replace(titleRegex, '')
-        const template6 = String(template5).replace(labelRegex, '')
-        issueBody = String(template6).replace(assigneesRegex, '')
+            // Delete template headers (poorman's version)
+            const template1 = String(issueTemplate).replace(lineRegex, '')
+            const template2 = String(template1).replace(nameRegex, '')
+            const template3 = String(template2).replace(nameRegex, '')
+            const template4 = String(template3).replace(aboutRegex, '')
+            const template5 = String(template4).replace(titleRegex, '')
+            const template6 = String(template5).replace(labelRegex, '')
+            issueBody = String(template6).replace(assigneesRegex, '')
 
-        // "poor-man's" debugging
-        console.log('\n name: ' + util.inspect(name))
-        console.log(' about: ' + util.inspect(about))
-        console.log(' title: ' + util.inspect(title))
-        console.log(' labels: ' + util.inspect(labels))
-        console.log(' assignees: ' + util.inspect(assignees))
-        console.log('---------------------------------------------')
+            // "poor-man's" debugging
+            console.log('\n name: ' + util.inspect(name))
+            console.log(' about: ' + util.inspect(about))
+            console.log(' title: ' + util.inspect(title))
+            console.log(' labels: ' + util.inspect(labels))
+            console.log(' assignees: ' + util.inspect(assignees))
+            console.log('---------------------------------------------')
 
-        // Create the requested labels, ignore the error if they already exist
-        labels.forEach(async function (label, index) {
-            // pick a random color, otherwise we get grey
-            const colors = ['407294', '8b66ff', 'a12b8d', '09a752', 'a7a109', '0fa709', 'a109a7', 'a7090f', '09a7a1', 'ff00ff', 'ffff00', 'ff0000', '0000ff', 'ff0080', 'ffff00', '0001ff', '00ff00', 'ff00ff', 'ff0080', '00ff7f', '7f00ff', '80ff00', 'ff7f00', '0080ff', '00ff80', '00ffff', 'ff000a', '00fff5', 'ff008a', '00ff75', '000bff', '7500ff', 'ff000b', '8aff00', '008aff', 'ff7500', '2bffff', 'ff2b95', '2bff2b', 'ff2b95', '2bff2b', '2b2bff']
-            const i = Math.floor(Math.random() * colors.length)
-            const color = colors[i]
-            // remove the color we just picked, try to prevent same colors for different labels (works as long as we have, labels <= #colors)
-            colors.splice(i, 1);
+            // Create the requested labels, ignore the error if they already exist
+            labels.forEach(async function (label, index) {
+                // pick a random color, otherwise we get grey
+                const colors = ['407294', '8b66ff', 'a12b8d', '09a752', 'a7a109', '0fa709', 'a109a7', 'a7090f', '09a7a1', 'ff00ff', 'ffff00', 'ff0000', '0000ff', 'ff0080', 'ffff00', '0001ff', '00ff00', 'ff00ff', 'ff0080', '00ff7f', '7f00ff', '80ff00', 'ff7f00', '0080ff', '00ff80', '00ffff', 'ff000a', '00fff5', 'ff008a', '00ff75', '000bff', '7500ff', 'ff000b', '8aff00', '008aff', 'ff7500', '2bffff', 'ff2b95', '2bff2b', 'ff2b95', '2bff2b', '2b2bff']
+                const i = Math.floor(Math.random() * colors.length)
+                const color = colors[i]
+                // remove the color we just picked, try to prevent same colors for different labels (works as long as we have, labels <= #colors)
+                colors.splice(i, 1);
 
-            try {
-                issue = await octokit.rest.issues.createLabel({
-                    owner: owner,
-                    repo: repo,
-                    description: 'auto-generated [' + label + ']',
-                    name: label,
-                    color: color
-                })
-            }
-            catch (e) {
-                // console.log(e)
-                console.log('WARN: Creating Label (' + label + ') failed, it probably already exists... continue!')
-            }
-        })
+                try {
+                    issue = await octokit.rest.issues.createLabel({
+                        owner: owner,
+                        repo: repo,
+                        description: 'auto-generated [' + label + ']',
+                        name: label,
+                        color: color
+                    })
+                }
+                catch (e) {
+                    // console.log(e)
+                    console.log('WARN: Creating Label (' + label + ') failed, it probably already exists... continue!')
+                }
+            })
 
-        try {
             issue = await octokit.rest.issues.create({
                 owner: owner,
                 repo: repo,
@@ -140,36 +140,37 @@ async function createProjectCard(columnId, issueTemplate, type, parameters, mile
                 assignees: assignees,
                 milestone: milestoneNumber
             });
-        }
-        catch (e) {
-            console.log(e)
-        }
 
-        card = await octokit.rest.projects.createCard({
-            column_id: columnId,
-            content_id: issue['data']['id'],
-            content_type: type
-        });
-    }
-    else if (type == 'Card') {
-        // Substitute parameters
-        if (parameters) {
-            for (const [key, value] of Object.entries(parameters)) {
-                issueTemplate = String(issueTemplate).replaceAll("{{" + key + "}}", value)
+
+            card = await octokit.rest.projects.createCard({
+                column_id: columnId,
+                content_id: issue['data']['id'],
+                content_type: type
+            });
+        }
+        else if (type == 'Card') {
+            // Substitute parameters
+            if (parameters) {
+                for (const [key, value] of Object.entries(parameters)) {
+                    issueTemplate = String(issueTemplate).replaceAll("{{" + key + "}}", value)
+                }
             }
+
+            // Delete template headers
+            const template1 = String(issueTemplate).replace(nameRegex, '')
+            const template2 = String(template1).replace(aboutRegex, '')
+            const template3 = String(template2).replace(titleRegex, '')
+            const template4 = String(template3).replace(labelRegex, '')
+            issueBody = String(template4).replace(assigneesRegex, '')
+
+            card = await octokit.rest.projects.createCard({
+                column_id: columnId,
+                note: issueBody
+            });
         }
-
-        // Delete template headers
-        const template1 = String(issueTemplate).replace(nameRegex, '')
-        const template2 = String(template1).replace(aboutRegex, '')
-        const template3 = String(template2).replace(titleRegex, '')
-        const template4 = String(template3).replace(labelRegex, '')
-        issueBody = String(template4).replace(assigneesRegex, '')
-
-        card = await octokit.rest.projects.createCard({
-            column_id: columnId,
-            note: issueBody
-        });
+    }
+    catch (e) {
+        console.log(e)
     }
     return card
 }
@@ -219,11 +220,16 @@ async function createProjectMilestone(milestoneName, description, dueDate) {
  * @param {*} column 
  * @returns 
  */
-function createProjectColumn(projectId, column) {
-    const col = octokit.rest.projects.createColumn({
-        project_id: projectId,
-        name: column['name']
-    })
+async function createProjectColumn(projectId, column) {
+    try {
+        const col = await octokit.rest.projects.createColumn({
+            project_id: projectId,
+            name: column['name']
+        })
+    }
+    catch (e) {
+        console.log(e)
+    }
     return col
 }
 
@@ -234,12 +240,17 @@ function createProjectColumn(projectId, column) {
  * @returns 
  */
 async function createProject(name, body) {
-    const project = await octokit.rest.projects.createForRepo({
-        owner: owner,
-        repo: repo,
-        name: name,
-        body: body
-    });
+    try {
+        const project = await octokit.rest.projects.createForRepo({
+            owner: owner,
+            repo: repo,
+            name: name,
+            body: body
+        });
+    }
+    catch (e) {
+        console.log(e)
+    }
     return project
 }
 
