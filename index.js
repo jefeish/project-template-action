@@ -304,6 +304,11 @@ async function exec() {
             issue_number: issueNumber,
         })
         templateName = issue['data']['body'].split(' ')[1].trim()
+        
+        if (!template) {
+            console.log('No template found, terminating!')
+            process.exit(1)
+        }
 
         // Retrieve the project template
         const projectTemplate = getTemplate(projectTemplatePath, templateName, 'project')
