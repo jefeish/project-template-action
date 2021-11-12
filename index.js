@@ -250,6 +250,7 @@ async function createProject(name, body) {
     }
     catch (e) {
         console.log(e)
+        process.exit(1)
     }
     return project
 }
