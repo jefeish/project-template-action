@@ -304,8 +304,8 @@ async function exec() {
             issue_number: issueNumber,
         })
         templateName = issue['data']['body'].split(' ')[1].trim()
-        
-        if (!template) {
+
+        if (!templateName) {
             console.log('No template found, terminating!')
             process.exit(1)
         }
