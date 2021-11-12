@@ -306,8 +306,10 @@ async function exec() {
             repo: repo,
             issue_number: issueNumber,
         })
-        console.log(util.inspect(issue))
-        
+        templateName = issue['data']['body'].split(' ')[1].trim()
+        // console.log(util.inspect(issue))
+        console.log('templateName: >'+ templateName +'<')
+
         // Retrieve the project template
         const projectTemplate = getTemplate(projectTemplatePath, templateName, 'project')
         const projects = projectTemplate['projects']
