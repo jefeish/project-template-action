@@ -20,20 +20,20 @@ Location: `.github/workflows/action.yml`
 name: project-template-action
 
 on:
-  issues:
-    types: [opened, edited]
   issue_comment:
-    types: [created, edited]
+    types: [created]
 
 jobs:
   test:
     runs-on: ubuntu-latest
+    if: contains(github.event.issue.body, '/project')
     steps:
       - uses: actions/checkout@v2
       - run: npm install @octokit/action
-      - uses: jefeish/project-template-action@v1
+      - uses: jefeish/project-template-action@v1.0
         with:
           GITHUB_TOKEN: ${{ secrets.SECRET_PAT }}
+
 ```
 
 ---

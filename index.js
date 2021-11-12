@@ -315,7 +315,7 @@ async function exec() {
         const projects = projectTemplate['projects']
 
         if (projects) {
-            // Create projects
+            // Create project(s)
             projects.forEach(async function (prj, index) {
                 const project = await createProject(prj['name'], prj['description'])
                 const projectId = project['data']['id']
