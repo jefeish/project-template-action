@@ -289,9 +289,6 @@ async function exec() {
     try {
         token = core.getInput("GITHUB_TOKEN");
         octokit = github.getOctokit(token)
-        // octokit = new github.getOctokit({
-        //     auth: token
-        // });
 
         owner = github.context.repo.owner
         repo = github.context.repo.repo
@@ -306,18 +303,14 @@ async function exec() {
             repo: repo,
             issue_number: issueNumber,
         })
-        console.log(issue['data']['body'])
         templateName = issue['data']['body'].split(' ')[1].trim()
-        console.log(issue['data']['body'])
-        // console.log(util.inspect(issue))
-        console.log('templateName: >'+ templateName +'<')
 
         // Retrieve the project template
         const projectTemplate = getTemplate(projectTemplatePath, templateName, 'project')
         const projects = projectTemplate['projects']
 
         if (projects) {
-            // Iterate over projects
+            // Create projects
             projects.forEach(async function (prj, index) {
                 const project = await createProject(prj['name'], prj['description'])
                 const projectId = project['data']['id']
@@ -325,14 +318,14 @@ async function exec() {
                 const milestone = await createProjectMilestone(prj['name'], prj['description'], prj['duedate'])
 
                 if (columns) {
-                    // Iterate over columns in project
+                    // Create columns in project
                     for (let i = 0; i < columns.length; i++) {
                         const projectColumn = await createProjectColumn(projectId, columns[i])
                         const columnId = projectColumn['data']['id']
                         const cards = columns[i]['cards']
 
                         if (cards) {
-                            // Iterate over cards in column
+                            // Create cards in column(s)
                             cards.forEach(async function (card, index) {
                                 const cardTemplateName = card['template']
                                 // Retrieve the local issue template
@@ -342,6 +335,7 @@ async function exec() {
                         }
                     }
                 }
+                await updateIssue(issueNumber, 'created a project: '+ project['data']['html_url'])
             })
         }
     } catch (e) {
