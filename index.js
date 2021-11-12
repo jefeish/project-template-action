@@ -259,6 +259,28 @@ async function createProject(name, body) {
 }
 
 /**
+ * @description
+ * @param {*} issueNumber 
+ * @param {*} comment 
+ */
+async function updateIssue(issueNumber, comment) {
+    let issue
+    try {
+        issue = await octokit.rest.issues.createComment({
+            owner: owner,
+            repo: repo,
+            issue_number: issueNumber,
+            body: comment,
+        });
+    }
+    catch (e)
+    {
+        console.log(e)
+    }
+    return issue
+}
+
+/**
  * @description Entrypoint
  */
 async function exec() {
@@ -277,6 +299,9 @@ async function exec() {
         console.log(' owner: ' + owner + '\n repo: ' + repo)
         console.log('GITHUB_TOKEN: ' + token)
 
+        // Get the name of the project template
+        console.log(util.inspect(github.context.issue))
+        
         // Retrieve the project template
         const projectTemplate = getTemplate(projectTemplatePath, templateName, 'project')
         const projects = projectTemplate['projects']
