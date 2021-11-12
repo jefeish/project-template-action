@@ -221,8 +221,9 @@ async function createProjectMilestone(milestoneName, description, dueDate) {
  * @returns 
  */
 async function createProjectColumn(projectId, column) {
+    let col
     try {
-        const col = await octokit.rest.projects.createColumn({
+        col = await octokit.rest.projects.createColumn({
             project_id: projectId,
             name: column['name']
         })
@@ -251,7 +252,6 @@ async function createProject(name, body) {
     }
     catch (e) {
         console.log(e)
-        process.exit(1)
     }
     return project
 }
