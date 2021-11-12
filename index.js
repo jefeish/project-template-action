@@ -80,7 +80,8 @@ async function createProjectCard(columnId, issueTemplate, type, parameters, mile
             // Substitute parameters
             if (parameters) {
                 for (const [key, value] of Object.entries(parameters)) {
-                    issueTemplate = String(issueTemplate).replaceAll("{{" + key + "}}", value)
+                    // issueTemplate = String(issueTemplate).replaceAll("{{" + key + "}}", value)
+                    issueTemplate = String(issueTemplate).split("{{" + key + "}}").join(value)
                 }
             }
 
@@ -199,7 +200,7 @@ async function createProjectMilestone(milestoneName, description, dueDate) {
     }
     catch (e) {
         // console.log(e)
-        console.log('WARN: Creating the Milestone ran into a problem, look up and return an existing Milestone')
+        console.log('WARN: Creating the Milestone ran into a problem, looking to return an existing Milestone')
         const milestoneList = await octokit.rest.issues.listMilestones({
             owner: owner,
             repo: repo
