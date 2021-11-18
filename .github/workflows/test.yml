@@ -10,6 +10,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: npm install @octokit/action
-      - uses: actions/hello-world-docker-action@v1
+      - uses: ./
         with:
-          who-to-greet: 'Mona the Octocat'
+          GITHUB_TOKEN: ${{ secrets.SECRET_PAT }}
