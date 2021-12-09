@@ -286,6 +286,7 @@ async function exec() {
     let token
 
     try {
+        template = core.getInput("templateName");
         token = core.getInput("GITHUB_TOKEN");
         octokit = github.getOctokit(token)
 
@@ -295,15 +296,18 @@ async function exec() {
         console.log(' owner: ' + owner + '\n repo: ' + repo)
         console.log('GITHUB_TOKEN: ' + token)
 
-        // Get the name of the project template
-        const issueNumber = github.context.issue.number
-        const issue = await octokit.rest.issues.get({
-            owner: owner,
-            repo: repo,
-            issue_number: issueNumber,
-        })
-        templateName = issue['data']['body'].split(' ')[1].trim()
-
+//         // Get the name of the project template
+//         const issueNumber = github.context.issue.number
+//         const issue = await octokit.rest.issues.get({
+//             owner: owner,
+//             repo: repo,
+//             issue_number: issueNumber,
+//         })
+//         
+//         templateName = issue['data']['body'].split(' ')[1].trim()
+        
+        templateName = template
+        
         if (!templateName) {
             console.log('No template found, terminating!')
             process.exit(1)
