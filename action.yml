@@ -5,7 +5,7 @@ inputs:
   GITHUB_TOKEN:
     description: 'GitHub token'
     required: true
-  template:
+  templateName:
     description: 'template name'
     required: true
     
