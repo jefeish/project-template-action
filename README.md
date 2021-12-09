@@ -42,18 +42,6 @@ jobs:
 
 ---
 
-## Issue *Trigger-Command*
-
-to trigger an automated project board setup based on templates, place a `/slash` command in an Issue comment or body.
-
-### Sample
-
-```bash
-/project prj-template-a
-```
-
----
-
 ## Project Template Sample
 
 Location: `.github/PROJECT_TEMPLATE/prj-template-a.yml`
