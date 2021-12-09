@@ -1,5 +1,5 @@
 ---
-name: Task
+name: Task1
 about: This template can be used to define delivery tasks
 title: '[TASK] {{TASK}}'
 label: Task,Feature,Alarm
