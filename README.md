@@ -17,22 +17,26 @@ This **Action** creates a **Project Board with pre-polulated Issues**, based on 
 Location: `.github/workflows/action.yml`
 
 ```Yaml
-name: project-template-action
+name: Test
 
 on:
-  issue_comment:
-    types: [created]
+  workflow_dispatch:
+    inputs:
+      template:
+        type: string
+        description: template
+        required: true
 
 jobs:
   test:
     runs-on: ubuntu-latest
-    if: contains(github.event.issue.body, '/project')
     steps:
       - uses: actions/checkout@v2
       - run: npm install @octokit/action
-      - uses: jefeish/project-template-action@v1.0
+      - uses: ./
         with:
-          GITHUB_TOKEN: ${{ secrets.SECRET_PAT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          templateName: ${{ github.event.inputs.template }}
 
 ```
 
