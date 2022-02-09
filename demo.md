@@ -24,7 +24,7 @@ Having the ability to create these boards based on templates improves their reus
 
 # What can you use it for ?
 
-For any project board that needs to be reusable or requires a standard component layout (Columns, Issues, etc)
+Any project board that needs to be reusable or requires a standard component layout (Columns, Issues, etc)
 
 ## A migration example 
 
