@@ -24,7 +24,7 @@ on:
     inputs:
       template:
         type: string
-        description: template
+        description: template (.github/PROJECT_TEMPLATES/)
         required: true
 
 jobs:
@@ -44,47 +44,63 @@ jobs:
 
 ## Project Template Sample
 
-Location: `action.yml`
+Location: `.github/PROJECT_TEMPLATE/migration-project-template.yml`
 
 ```Yaml
 ---
 projects:
-  - name: Project_1
-    description: Test Project 
+  - name: Migration 1
+    description: Migration Project 1 
+    # Milestone due date - example format '2022-11-10T00:00:00Z'
+    duedate: '2022-11-10T00:00:00Z'
     columns:
-      # Project Board Column  
-      - name: ToDo
+
+      - name: Step 1 - Pre-migration
         manage: none
         cards:
-          - name: Issue_1
+          - name: Issue_prepare-migration-checklist
             type: Issue
-            template: bug
+            template: Issue_prepare-migration-checklist
             parameters:
-              TASK: BUG
-              TITLE: another one
-          - name: Issue_2
+              ASSIGNEES: jefeish
+              TITLE: Migration 1
+              TASK: Sample Issue A
+          - name: Issue_consolidate-migration-resources
             type: Issue
-            template: task
+            template: Issue_consolidate-migration-resources
             parameters:
-              TASK: BUG
-              TITLE: another one
-      # Project Board Column  
-      - name: InProgress
+              ASSIGNEES: jefeish
+              TITLE: Migration 1
+              TASK: Sample Issue B
+          - name: Issue_cleanup-resources
+            type: Issue
+            template: Issue_cleanup-resources
+            parameters:
+              ASSIGNEES: jdoe
+              TITLE: Migration 1
+              TASK: Sample Issue C
+          - name: Issue_determine-scope-of-migration
+            type: Issue
+            template: Issue_determine-scope-of-migration
+            parameters:
+              ASSIGNEES: jdoe
+              TITLE: Migration 1      
+              TASK: Sample Issue D
+
+      - name: Step 2 - Exporting Migration Data
         manage: none
-        cards:
-          - name: Card_1
-            type: Card
-            template: bug
-          - name: Issue_1
-            type: Issue
-            template: task
-      # Project Board Column  
+
+      - name: Step 3 - Importing Migration Data
+        manage: none
+
+      - name: Step 4 - Post-migration
+        manage: none
+
       - name: Done
         manage: none
-
 ```
 
-## A Test Action
+## To Run the Test Action
 
 ![sample](docs/images/sample-workflow.png)
 
