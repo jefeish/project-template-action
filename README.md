@@ -84,6 +84,10 @@ projects:
 
 ```
 
+## A Test Action
+
+![sample](docs/images/sample-workflow.png)
+
 ## Concept Details
 
 ### TL;DR
