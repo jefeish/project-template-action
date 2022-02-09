@@ -2,7 +2,7 @@
 
 GitHub action to create Project Boards from template Yaml files.
 
-This **Action** creates a **Project Board with pre-polulated Issues**, based on **Issue-Templates**.
+This **Action** creates a **Project Board with pre-populated Issues**, based on **Issue-Templates**.
 
 ---
 
@@ -14,83 +14,95 @@ This **Action** creates a **Project Board with pre-polulated Issues**, based on 
 
 ## Action Workflow Example
 
-Location: `.github/workflows/action.yml`
+Location: `.github/workflows/test.yml`
 
 ```Yaml
-name: project-template-action
+name: Test
 
 on:
-  issue_comment:
-    types: [created]
+  workflow_dispatch:
+    inputs:
+      template:
+        type: string
+        description: template (.github/PROJECT_TEMPLATES/)
+        required: true
 
 jobs:
   test:
     runs-on: ubuntu-latest
-    if: contains(github.event.issue.body, '/project')
     steps:
       - uses: actions/checkout@v2
       - run: npm install @octokit/action
-      - uses: jefeish/project-template-action@v1.0
+      - uses: ./
         with:
-          GITHUB_TOKEN: ${{ secrets.SECRET_PAT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          templateName: ${{ github.event.inputs.template }}
 
-```
-
----
-
-## Issue *Trigger-Command*
-
-to trigger an automated project board setup based on templates, place a `/slash` command in an Issue comment or body.
-
-### Sample
-
-```bash
-/project prj-template-a
 ```
 
 ---
 
 ## Project Template Sample
 
-Location: `.github/PROJECT_TEMPLATE/prj-template-a.yml`
+Location: `.github/PROJECT_TEMPLATE/migration-project-template.yml`
 
 ```Yaml
 ---
 projects:
-  - name: Project_1
-    description: Test Project 
+  - name: Migration 1
+    description: Migration Project 1 
+    # Milestone due date - example format '2022-11-10T00:00:00Z'
+    duedate: '2022-11-10T00:00:00Z'
     columns:
-      # Project Board Column  
-      - name: ToDo
+
+      - name: Step 1 - Pre-migration
         manage: none
         cards:
-          - name: Issue_1
+          - name: Issue_prepare-migration-checklist
             type: Issue
-            template: bug
+            template: Issue_prepare-migration-checklist
             parameters:
-              TASK: BUG
-              TITLE: another one
-          - name: Issue_2
+              ASSIGNEES: jefeish
+              TITLE: Migration 1
+              TASK: Sample Issue A
+          - name: Issue_consolidate-migration-resources
             type: Issue
-            template: task
+            template: Issue_consolidate-migration-resources
             parameters:
-              TASK: BUG
-              TITLE: another one
-      # Project Board Column  
-      - name: InProgress
-        manage: none
-        cards:
-          - name: Card_1
-            type: Card
-            template: bug
-          - name: Issue_1
+              ASSIGNEES: jefeish
+              TITLE: Migration 1
+              TASK: Sample Issue B
+          - name: Issue_cleanup-resources
             type: Issue
-            template: task
-      # Project Board Column  
-      - name: Done
+            template: Issue_cleanup-resources
+            parameters:
+              ASSIGNEES: jdoe
+              TITLE: Migration 1
+              TASK: Sample Issue C
+          - name: Issue_determine-scope-of-migration
+            type: Issue
+            template: Issue_determine-scope-of-migration
+            parameters:
+              ASSIGNEES: jdoe
+              TITLE: Migration 1      
+              TASK: Sample Issue D
+
+      - name: Step 2 - Exporting Migration Data
         manage: none
 
+      - name: Step 3 - Importing Migration Data
+        manage: none
+
+      - name: Step 4 - Post-migration
+        manage: none
+
+      - name: Done
+        manage: none
 ```
+
+## To Run the Test Action
+
+![sample](docs/images/sample-workflow.png)
 
 ## Concept Details
 

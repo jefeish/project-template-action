@@ -1,0 +1,51 @@
+---
+projects:
+  - name: Migration 1
+    description: Migration Project 1 
+    # Milestone due date - example format '2022-11-10T00:00:00Z'
+    duedate: '2022-11-10T00:00:00Z'
+    columns:
+
+      - name: Step 1 - Pre-migration
+        manage: none
+        cards:
+          - name: Issue_prepare-migration-checklist
+            type: Issue
+            template: Issue_prepare-migration-checklist
+            parameters:
+              ASSIGNEES: jefeish
+              TITLE: Migration 1
+              TASK: Sample Issue A
+          - name: Issue_consolidate-migration-resources
+            type: Issue
+            template: Issue_consolidate-migration-resources
+            parameters:
+              ASSIGNEES: jefeish
+              TITLE: Migration 1
+              TASK: Sample Issue B
+          - name: Issue_cleanup-resources
+            type: Issue
+            template: Issue_cleanup-resources
+            parameters:
+              ASSIGNEES: jdoe
+              TITLE: Migration 1
+              TASK: Sample Issue C
+          - name: Issue_determine-scope-of-migration
+            type: Issue
+            template: Issue_determine-scope-of-migration
+            parameters:
+              ASSIGNEES: jdoe
+              TITLE: Migration 1      
+              TASK: Sample Issue D
+
+      - name: Step 2 - Exporting Migration Data
+        manage: none
+
+      - name: Step 3 - Importing Migration Data
+        manage: none
+
+      - name: Step 4 - Post-migration
+        manage: none
+
+      - name: Done
+        manage: none

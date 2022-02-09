@@ -5,7 +5,14 @@ inputs:
   GITHUB_TOKEN:
     description: 'GitHub token'
     required: true
-
+  templateName:
+    description: 'template name'
+    required: true
+    
 runs:
   using: node12
   main: index.js
+
+branding:
+  icon: 'check-square'  
+  color: 'green'
