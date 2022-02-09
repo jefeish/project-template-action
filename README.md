@@ -14,7 +14,7 @@ This **Action** creates a **Project Board with pre-populated Issues**, based on 
 
 ## Action Workflow Example
 
-Location: `.github/workflows/action.yml`
+Location: `.github/workflows/test.yml`
 
 ```Yaml
 name: Test
