@@ -5,7 +5,7 @@ on:
     inputs:
       template:
         type: string
-        description: template
+        description: template (.github/PROJECT_TEMPLATES/)
         required: true
 
 jobs:
