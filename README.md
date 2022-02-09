@@ -44,7 +44,7 @@ jobs:
 
 ## Project Template Sample
 
-Location: `.github/PROJECT_TEMPLATE/prj-template-a.yml`
+Location: `action.yml`
 
 ```Yaml
 ---
