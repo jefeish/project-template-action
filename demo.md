@@ -8,35 +8,24 @@ Create Project Boards and Project Cards completely from Yaml templates!
 
 # Why did we make this ?
 
-Lets imagine you start working on a new solution and
-these are the usual tasks...
+Project templates complement the set of existing templates
 
-- create a Repo,
-- add some code,
-- add some documentation :crossed_fingers:
-- and to top it off, apply CI/CD! :tada:
+- Repo templates
+- Issue Templates
 
-Now as soon as your solution becomes more popular you start using Issues for collaboration and **`project boards to coordinate and manage`** the collaboration. :thumbsup:
 
-So to make this work, what tools do we have... ?
+>Project Templates
 
-- For Repos, we have Repo templates
-- For Issues, we have Issue Templates
-- For Projects, we have ... :thinking: ?
+Project boards can represent a common or reusable process. 
 
-...you get the point ?! :)
-
-Project Boards can describe a `Process` or even a `Playbook` (not ansible :grin:).
-
-We can reuse that!
-
->BUT: If you create the Project "by hand" it's tough to reuse it! :shrug:
+Having the ability to create these boards based on templates improves their reusability and accelerates project setup!
 
 ---
 
 # What can you use it for ?
 
-Anything that benefits from some project management or planning !
+For any project board that needs to be reusable or requires a standard component layout (Columns, Issues, etc)
+
 ## A migration example 
 
 Imagen a Project Board for [GitHub migrations](https://github.github.io/enterprise-migrations/#/./0-about), listing all the admistrative `steps required to manage a migration`!
