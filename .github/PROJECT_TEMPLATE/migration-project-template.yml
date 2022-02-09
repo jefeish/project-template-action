@@ -21,18 +21,21 @@ projects:
             parameters:
               ASSIGNEES: jefeish
               TITLE: Migration 1
+              TASK: Sample Issue A
           - name: Issue_cleanup-resources
             type: Issue
             template: Issue_cleanup-resources
             parameters:
               ASSIGNEES: jdoe
               TITLE: Migration 1
+              TASK: Sample Issue B
           - name: Issue_determine-scope-of-migration
             type: Issue
             template: Issue_determine-scope-of-migration
             parameters:
               ASSIGNEES: jdoe
               TITLE: Migration 1      
+              TASK: Sample Issue C
 
       - name: Step 2 - Exporting Migration Data
         manage: none
