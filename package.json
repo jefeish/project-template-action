@@ -25,6 +25,8 @@
     "@actions/github": "^5.0.0",
     "@octokit/action": "^3.18.0",
     "@octokit/rest": "^18.12.0",
+    "commander": "^9.1.0",
+    "github": "^14.0.0",
     "husky": "^7.0.4",
     "js-yaml": "^4.1.0",
     "octokit": "^1.7.0",

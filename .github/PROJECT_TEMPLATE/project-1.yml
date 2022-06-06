@@ -24,6 +24,8 @@ projects:
           - name: Issue_3
             type: Card
             template: task
+            body: |
+              This is a test card
             parameters:
               TASK: RFC
               TITLE: new request
