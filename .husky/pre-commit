@@ -2,3 +2,4 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 ncc build index.js --license LICENSE
+git add dist/index.js dist/LICENSE
